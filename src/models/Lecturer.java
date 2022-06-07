@@ -2,7 +2,7 @@ package models;
 
 /**
  *
- * @author Roger NDJEUMOU
+ * @author Pacha
  */
 public class Lecturer {
     private int id ;

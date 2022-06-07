@@ -11,14 +11,16 @@ import java.util.logging.Logger;
 import javafx.scene.image.Image;
 import models.Course;
 import models.CourseSchedule;
+import models.FinalMark;
 import models.Login;
 import models.Person;
+import models.Semester;
 import models.Student;
 import models.Timetable;
 
 /**
  *
- * @author Roger NDJEUMOU
+ * @author Pacha
  */
 public class DatabaseConnectionManager {
 
@@ -193,6 +195,8 @@ public class DatabaseConnectionManager {
 
         return objects;
     }
+    
+    //kkkkk
 
     public Timetable getTimetable(int idProgram, String semester, int year) {
         String query = "SELECT `timetable_id`, timetable.`semester_id`, timetable.`depart_id`, `timetable` "
@@ -241,4 +245,159 @@ public class DatabaseConnectionManager {
         
         return null ;
     }
+    //By Fredy To retrieve final mark of a specific student from the database 
+   public ArrayList<Object> getStudentFinalMarks(String regNumber) {
+       
+       ArrayList<Object> objects = new ArrayList<>();
+       ArrayList<FinalMark> marks = new ArrayList<>();
+       ArrayList<Semester> semesters = new ArrayList<>();
+       ArrayList<Course> courses = new ArrayList<>();
+       
+        String query = "SELECT `course_id`,`final_mark`,semester.semester_name,semester.semester_year,final_mark.semester_id " +
+                       "FROM `final_mark` JOIN semester ON final_mark.semester_id = semester.semester_id " +
+                       "WHERE final_mark.stud_id = ? ;";
+        
+        try {
+            PreparedStatement prepStatement = connection.prepareStatement(query);
+            prepStatement.setString(1, regNumber);
+            ResultSet rs = prepStatement.executeQuery();
+            while (rs.next()) {
+                FinalMark newFinalMark = new FinalMark(rs.getDouble("final_mark"));
+                Semester newSemester = new Semester(rs.getInt("semester_id"),rs.getString("semester_name"),rs.getInt("semester_year"));
+                Course newCourse = new Course(rs.getString("course_id"));
+                marks.add(newFinalMark);
+                semesters.add(newSemester);
+                courses.add(newCourse);
+            }
+
+        } catch (SQLException e) {
+            System.out.println("GET STUDENT FINAL MARKS ERROR: "
+                    + e.getMessage());
+        }
+
+            objects.add(marks);
+            objects.add(semesters);
+            objects.add(courses);
+            return objects;
+    }
+   
+   //By Fredy to retrieve the first and last name of the case student from the database
+   public Person getStudentNameFromFinalMarkTable(String regNumber) {
+       
+      
+        String query = "SELECT person.per_last_name, person.per_first_name " +
+                       "FROM `final_mark` JOIN student ON final_mark.stud_id = student.stud_id " +
+                       "JOIN person ON student.per_id = person.per_id " +
+                       "WHERE final_mark.stud_id = ? GROUP BY person.per_last_name;";
+        
+        try {
+            PreparedStatement prepStatement = connection.prepareStatement(query);
+            prepStatement.setString(1, regNumber);
+            ResultSet rs = prepStatement.executeQuery();
+            if (rs.next()) {
+                Person person = new Person(rs.getString("per_last_name"),rs.getString("per_first_name"));
+                return person;
+            }
+            
+        } catch (SQLException e) {
+            System.out.println("GET STUDENT NAME FROM FINAL MARK  ERROR: "
+                    + e.getMessage());
+        }
+
+        return null;
+    }
+   
+   //By Fredy to retrieve the distinct semester id of the student from the final mark table
+   public int getStudentDistinctSemesterIdFromFinalMarkTable(String regNumber) {
+        int count = 0;
+      
+        String query = "SELECT COUNT(DISTINCT semester_id) AS numberOfSemester " +
+                       "FROM final_mark " +
+                       "WHERE stud_id = ?;";
+        
+        try {
+            PreparedStatement prepStatement = connection.prepareStatement(query);
+            prepStatement.setString(1, regNumber);
+            ResultSet rs = prepStatement.executeQuery();
+            if (rs.next()) {
+                count = rs.getInt("numberOfSemester");
+            }
+            return count;
+        } catch (SQLException e) {
+            System.out.println("GET DISTINCT SEMESTER ID FROM FINAL MARK TABLE ERRORS: "
+                    + e.getMessage());
+        }
+
+        return 0;
+    }
+   
+   //By Fredy to retrieve the program name and the faculty name of a specific student
+   public ArrayList<String> getProgramNameAndFacultyNameFromASpecificStudent(String regNumber) {
+        ArrayList<String> result = new ArrayList<>();
+      
+        String query = "SELECT faculty.fac_name, department.depart_name " +
+                       "FROM `student` JOIN program USING(prog_id) " +
+                       "JOIN department USING(depart_id) " +
+                       "JOIN faculty USING(fac_id) " +
+                       "WHERE student.stud_id = ? ;";
+        
+        try {
+            PreparedStatement prepStatement = connection.prepareStatement(query);
+            prepStatement.setString(1, regNumber);
+            ResultSet rs = prepStatement.executeQuery();
+            if (rs.next()) {
+                result.add(rs.getString("fac_name"));
+                result.add(rs.getString("depart_name"));
+            }
+            return result;
+        } catch (SQLException e) {
+            System.out.println("GET PROGRAM NAME AND FACULTY NAME FROM A SPECIFIC STUDENT ERRORS: "
+                    + e.getMessage());
+        }
+
+        return null;
+    }
+   
+   //By Fredy to retrieve the level name of a student
+   public String getLevelNameOfASpecificStudent(String regNumber) {
+        String s = "";
+      
+        String query = "SELECT `level_name`  " +
+                       "FROM `school_level` " +
+                       "WHERE `level_id` = (SELECT student.stud_level FROM student WHERE student.stud_id = ?);";
+        
+        try {
+            PreparedStatement prepStatement = connection.prepareStatement(query);
+            prepStatement.setString(1, regNumber);
+            ResultSet rs = prepStatement.executeQuery();
+            if (rs.next()) {
+                s = rs.getString("level_name");
+            }
+            return s;
+        } catch (SQLException e) {
+            System.out.println("GET LEVEL NAME OF A SPECIFIC STUDENT ERRORS: "
+                    + e.getMessage());
+        }
+
+        return null;
+    }
+   
+   //By Fredy to update the pseudo of a person
+   public void setPersonPseudo(String regNumber, String pseudo) {
+      
+        String query = "UPDATE `person` " +
+                       "SET `per_pseudo`= ? " +
+                       "WHERE person.per_id = (SELECT student.per_id FROM student WHERE student.stud_id = ?);";
+    //UPDATE `person` SET `per_pseudo`=  "Koodjo" WHERE person.per_id = (SELECT student.per_id FROM student WHERE student.stud_id = "21S034");    
+        
+        try {
+            PreparedStatement prepStatement = connection.prepareStatement(query);
+            prepStatement.setString(1, pseudo);
+            prepStatement.setString(2, regNumber);
+            prepStatement.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println("SET PERSON PSEUDO ERRORS: "
+                    + e.getMessage());
+        }
+    }   
 }

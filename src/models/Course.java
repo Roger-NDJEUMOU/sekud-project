@@ -4,7 +4,7 @@ import java.io.File;
 
 /**
  *
- * @author Roger NDJEUMOU
+ * @author Pacha
  */
 public class Course {
     String idCourse ;
@@ -19,6 +19,12 @@ public class Course {
         this.idCourse = idCourse;
         this.title = title;
     }
+
+    public Course(String idCourse) {
+        this.idCourse = idCourse;
+    }
+    
+    
 
     public Course(String idCourse, String title, 
             String description, int credit, int passingScore, 

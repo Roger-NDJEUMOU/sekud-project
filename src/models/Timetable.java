@@ -4,7 +4,7 @@ import java.io.File;
 
 /**
  *
- * @author Roger NDJEUMOU
+ * @author Pacha
  */
 public class Timetable {
     private int id ;

@@ -32,7 +32,7 @@ import models.Login;
 /**
  * FXML Controller class
  *
- * @author Roger NDJEUMOU
+ * @author Pacha
  */
 public class LoginController implements Initializable {
 

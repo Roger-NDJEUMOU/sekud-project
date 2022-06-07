@@ -14,7 +14,7 @@ import models.Login;
 
 /**
  *
- * @author Roger NDJEUMOU
+ * @author Pacha
  */
 public class Main extends Application {
 

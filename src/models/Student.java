@@ -4,7 +4,7 @@ import java.util.Objects;
 
 /**
  *
- * @author Roger NDJEUMOU
+ * @author Pacha
  */
 public class Student implements Comparable<Student>{
     private String id ;

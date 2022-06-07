@@ -4,7 +4,7 @@ import java.sql.Time ;
 
 /**
  *
- * @author Roger NDJEUMOU
+ * @author Pacha
  */
 public class CourseSchedule {
     int idSchedule ;

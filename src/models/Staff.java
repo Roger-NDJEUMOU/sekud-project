@@ -2,7 +2,7 @@ package models;
 
 /**
  *
- * @author Roger NDJEUMOU
+ * @author Pacha
  */
 public class Staff {
     enum Function {HOD,AAO,AO,Bursar,Dean,Rector};

@@ -5,7 +5,7 @@ import javafx.scene.image.Image;
 
 /**
  *
- * @author Roger NDJEUMOU
+ * @author Pacha
  */
 public class Person {
     private int id ;
@@ -21,6 +21,11 @@ public class Person {
     private String pseudo ;
     private String status ;
     private String title ;
+
+    public Person(String lastName, String firstName) {
+        this.lastName = lastName;
+        this.firstName = firstName;
+    }
 
     public Person(int id, int idLogin, String lastName, String firstName, char gender, Date dateOfBirth, String phoneNumber, String address, String email, Image photo, String pseudo, String status, String title) {
         this.id = id;

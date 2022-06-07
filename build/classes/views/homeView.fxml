@@ -25,7 +25,7 @@
 <?import javafx.scene.shape.Ellipse?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #F9F7F7;" stylesheets="@../css/home.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.HomeController">
+<BorderPane fx:id="homeBorderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #F9F7F7;" stylesheets="@../css/home.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.HomeController">
    <top>
       <GridPane style="-fx-background-color: linear-gradient(#F9F7F7, #DBE2EF, #0C5070, #0C5070 100%);" BorderPane.alignment="CENTER">
         <columnConstraints>
@@ -61,7 +61,7 @@
                <effect>
                   <DropShadow blurType="ONE_PASS_BOX" height="20.0" offsetX="1.0" radius="9.5" spread="0.2" width="20.0">
                      <color>
-                        <Color red="0.06666667014360428" green="0.1764705926179886" blue="0.30588236451148987" />
+                        <Color blue="0.30588236451148987" green="0.1764705926179886" red="0.06666667014360428" />
                      </color>
                   </DropShadow>
                </effect>
@@ -74,14 +74,14 @@
                   <Image url="@../images/icons/student_female2.png" />
                </image>
             </ImageView>
-            <Button alignment="CENTER" mnemonicParsing="false" style="-fx-background-color: rgba(0,0,0,0);" text="Sign Out" textAlignment="CENTER" textFill="WHITE" GridPane.columnIndex="5" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER">
+            <Button alignment="CENTER" mnemonicParsing="false" onAction="#onSignOut" style="-fx-background-color: rgba(0,0,0,0);" text="Sign Out" textAlignment="CENTER" textFill="WHITE" GridPane.columnIndex="5" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER">
                <font>
                   <Font name="Gabriola" size="18.0" />
                </font>
                <effect>
                   <DropShadow blurType="ONE_PASS_BOX" spread="0.2">
                      <color>
-                        <Color red="0.06666667014360428" green="0.1764705926179886" blue="0.30588236451148987" />
+                        <Color blue="0.30588236451148987" green="0.1764705926179886" red="0.06666667014360428" />
                      </color>
                   </DropShadow>
                </effect>
@@ -89,14 +89,14 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Button>
-            <Button alignment="CENTER" layoutX="519.0" layoutY="65.0" mnemonicParsing="false" style="-fx-background-color: rgba(0,0,0,0);" text="Home" textAlignment="CENTER" textFill="WHITE" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER">
+            <Button fx:id="homeButton" alignment="CENTER" layoutX="519.0" layoutY="65.0" mnemonicParsing="false" onAction="#onHome" style="-fx-background-color: rgba(0,0,0,0);" text="Home" textAlignment="CENTER" textFill="WHITE" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER">
                <font>
                   <Font name="Gabriola" size="24.0" />
                </font>
                <effect>
                   <DropShadow blurType="ONE_PASS_BOX" spread="0.2">
                      <color>
-                        <Color red="0.06666667014360428" green="0.1764705926179886" blue="0.30588236451148987" />
+                        <Color blue="0.30588236451148987" green="0.1764705926179886" red="0.06666667014360428" />
                      </color>
                   </DropShadow>
                </effect>
@@ -104,14 +104,14 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Button>
-            <Button alignment="CENTER" layoutX="28.0" layoutY="65.0" mnemonicParsing="false" style="-fx-background-color: rgba(0,0,0,0);" text="My Academic Record" textAlignment="CENTER" textFill="WHITE" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER">
+            <Button fx:id="btnMyAcademicRecord" alignment="CENTER" layoutX="28.0" layoutY="65.0" mnemonicParsing="false" onAction="#onMyAcademicRecord" style="-fx-background-color: rgba(0,0,0,0);" text="My Academic Record" textAlignment="CENTER" textFill="WHITE" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER">
                <font>
                   <Font name="Gabriola" size="24.0" />
                </font>
                <effect>
                   <DropShadow blurType="ONE_PASS_BOX" spread="0.2">
                      <color>
-                        <Color red="0.06666667014360428" green="0.1764705926179886" blue="0.30588236451148987" />
+                        <Color blue="0.30588236451148987" green="0.1764705926179886" red="0.06666667014360428" />
                      </color>
                   </DropShadow>
                </effect>
@@ -119,14 +119,14 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Button>
-            <Button alignment="CENTER" layoutX="110.0" layoutY="65.0" mnemonicParsing="false" style="-fx-background-color: rgba(0,0,0,0);" text="My Profile" textAlignment="CENTER" textFill="WHITE" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER">
+            <Button fx:id="btnMyProfile" alignment="CENTER" layoutX="110.0" layoutY="65.0" mnemonicParsing="false" onAction="#onMyProfile" style="-fx-background-color: rgba(0,0,0,0);" text="My Profile" textAlignment="CENTER" textFill="WHITE" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER">
                <font>
                   <Font name="Gabriola" size="24.0" />
                </font>
                <effect>
                   <DropShadow blurType="ONE_PASS_BOX" spread="0.2">
                      <color>
-                        <Color red="0.06666667014360428" green="0.1764705926179886" blue="0.30588236451148987" />
+                        <Color blue="0.30588236451148987" green="0.1764705926179886" red="0.06666667014360428" />
                      </color>
                   </DropShadow>
                </effect>
@@ -141,7 +141,7 @@
                <effect>
                   <DropShadow blurType="ONE_PASS_BOX" height="20.0" offsetX="1.0" radius="9.5" spread="0.2" width="20.0">
                      <color>
-                        <Color red="0.06666667014360428" green="0.1764705926179886" blue="0.30588236451148987" />
+                        <Color blue="0.30588236451148987" green="0.1764705926179886" red="0.06666667014360428" />
                      </color>
                   </DropShadow>
                </effect>
@@ -240,7 +240,7 @@
                <effect>
                   <DropShadow blurType="ONE_PASS_BOX" height="20.0" offsetX="1.0" radius="9.5" spread="0.2" width="20.0">
                      <color>
-                        <Color red="0.06666667014360428" green="0.1764705926179886" blue="0.30588236451148987" />
+                        <Color blue="0.30588236451148987" green="0.1764705926179886" red="0.06666667014360428" />
                      </color>
                   </DropShadow>
                </effect>
@@ -249,7 +249,7 @@
       </HBox>
    </bottom>
    <center>
-      <ScrollPane fitToWidth="true" BorderPane.alignment="CENTER">
+      <ScrollPane fx:id="homeCenterPane" fitToWidth="true" BorderPane.alignment="CENTER">
          <content>
             <VBox spacing="10.0">
                <children>

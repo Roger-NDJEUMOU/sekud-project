@@ -4,7 +4,7 @@ import java.util.GregorianCalendar;
 
 /**
  *
- * @author Roger NDJEUMOU
+ * @author Pacha
  * @date May 14, 2022
  */
 public class MyDate {
